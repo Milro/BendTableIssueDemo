@@ -54,7 +54,17 @@ namespace BendTableIssueDemo
         private void btnCreateDrawing_Click(object sender, EventArgs e)
         {
             OleMessageFilter.Register();
+            bool connectable = SolidEdgeHelpers.IsSolidEdgeConnectable();
+            if (!connectable) { 
+                MessageBox.Show("Solid Edge is not connectable.");
+                return;
+            }
             var seApp = SolidEdgeHelpers.GetSolidEdgeAppReference();
+            if(seApp.Documents.Count <1)
+            {
+                MessageBox.Show("No documents open");
+                return;
+            }
             CreateDrawing(seApp, seApp.ActiveDocument);//No error handling
             OleMessageFilter.Revoke();
         }
