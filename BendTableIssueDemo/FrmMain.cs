@@ -31,6 +31,11 @@ namespace BendTableIssueDemo
                 MessageBox.Show("No Bends on this sheetmetal file , Please use a sheetmetal file that has bends");
                 return;
             }
+            if (seSheetDoc.FlatPatternModels.Count < 1) {
+                MessageBox.Show("No flat pattern exists in the model , please flatten the sheet metal");
+                return;
+
+            }
             DraftDocument draftDocument = seApp.Documents.Add("SolidEdge.DraftDocument");
             ModelLink modelLink = draftDocument.ModelLinks.Add(seDoc.FullName);
             SolidEdgeDraft.DrawingView flatPatternView = null;
